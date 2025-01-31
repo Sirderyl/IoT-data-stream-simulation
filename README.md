@@ -3,7 +3,7 @@
 This project simulates a machine learning based IoT data processing pipeline in an edge-cloud setting. A server on the edge layer collects weather data from IoT sensors located at the Newcastle's Urban Observatory and uses the MQTT protocol to send the data to another server on the edge layer (the same server in this simulation). The server then performes some data processing (removing outliers, calculating 24-hour averages) and uses the RabbitMQ protocol to send the processed data to a server on the cloud layer. That server uses the data to train a machine learning model which predicts the weather trends for the next 15 days.
 
 ![Data flow pipeline](./assets/data_flow_pipeline.png)
-*Image1: Data flow pipeline*
+*Image 1: Data flow pipeline*
 
 ---
 
