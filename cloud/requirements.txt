@@ -1,0 +1,6 @@
+pika
+pandas
+matplotlib
+ticker
+prophet
+plotly
