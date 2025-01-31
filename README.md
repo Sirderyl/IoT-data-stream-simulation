@@ -3,13 +3,13 @@
 This project simulates a machine learning based IoT data processing pipeline in an edge-cloud setting. A server on the edge layer collects weather data from IoT sensors located at the Newcastle's Urban Observatory and uses the MQTT protocol to send the data to another server on the edge layer (the same server in this simulation). The server then performes some data processing (removing outliers, calculating 24-hour averages) and uses the RabbitMQ protocol to send the processed data to a server on the cloud layer. That server uses the data to train a machine learning model which predicts the weather trends for the next 15 days.
 
 ![Data flow pipeline](./assets/data_flow_pipeline.png)
-*Data flow pipeline*
+*Image1: Data flow pipeline*
 
 ---
 
 ## How to run
 
-Make sure to change the IP addresses in `mqtt_subscriber`, `mqtt_publisher`, `rabbitmq producer`, and `rabbitmq consumer` to correspond with the edge/cloud server IP addresses on your network.
+Make sure to change the IP addresses in `mqtt_subscriber`, `mqtt_publisher`, `rabbitmq_producer`, and `rabbitmq_consumer` to correspond with the edge/cloud server IP addresses on your network.
 
 ### Edge layer setup
 
@@ -26,7 +26,7 @@ docker run -d --name emqx -p 18083:18083 -p 1883:1883 emqx:latest
 The `docker ps` command shows a running EMQX service:
 
 ![Running EMQX container](./assets/running_emqx_container.png)
-*Terminal output showing a running EMQX container*
+*Image 2: Terminal output showing a running EMQX container*
 
 Now build a Docker image using the provided Dockerfile:
 ```bash
@@ -53,7 +53,7 @@ sudo docker-compose up
 Two containers should be running on cloud:
 
 ![Cloud containers](./assets/cloud_containers.png)
-*Terminal output showing running data_processor and rabbitmq containers*
+*Image 3: Terminal output showing running data_processor and rabbitmq containers*
 
 Now that all the subscribers/consumers are ready and listening for messages, we can run the MQTT publisher script which initiates the process of collecting data from the IoT sensors all the way to the model training.
 
@@ -67,8 +67,8 @@ You can see the terminal outputs on the MQTT/RabbitMQ services as the data get p
 As a result, two new images are created on the Cloud layer in the output directory - `Averages_over_time` and `prediction`. The former shows a graph of daily averages of weather PM2.5 data collected from the sensors and the latter shows the prediction output from the model.
 
 ![Averages over time](./assets/Averages_over_time.png)
-*Averaged weather data collected from the sensors*
+*Image 4: Averaged weather data collected from the sensors*
 
 
 ![Predictions](./assets/prediction.png)
-*Predictions made by the trained model*
+*Image 5: Predictions made by the trained model*
